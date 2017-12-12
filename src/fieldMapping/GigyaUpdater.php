@@ -47,6 +47,11 @@ abstract class GigyaUpdater
 
     /**
      * GigyaUpdater constructor.
+	 *
+	 * @param $cmsValuesArray
+	 * @param $gigyaUid
+	 * @param $path
+	 * @param $apiHelper
      */
     public function __construct($cmsValuesArray, $gigyaUid, $path, $apiHelper)
     {
