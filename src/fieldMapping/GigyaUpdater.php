@@ -14,7 +14,6 @@ use Gigya\CmsStarterKit\GigyaApiHelper;
 
 abstract class GigyaUpdater
 {
-
     /**
      * @var array
      */
@@ -44,9 +43,13 @@ abstract class GigyaUpdater
      */
     private $apiHelper;
 
-
     /**
      * GigyaUpdater constructor.
+	 *
+	 * @param $cmsValuesArray
+	 * @param $gigyaUid
+	 * @param $path
+	 * @param $apiHelper
      */
     public function __construct($cmsValuesArray, $gigyaUid, $path, $apiHelper)
     {
@@ -55,7 +58,6 @@ abstract class GigyaUpdater
         $this->path     = (string) $path;
         $this->mapped   = ! empty($this->path);
         $this->apiHelper = $apiHelper;
-
     }
 
     public function updateGigya()
@@ -146,8 +148,6 @@ abstract class GigyaUpdater
      */
     abstract protected function getMappingFromCache();
 
-
-
     protected function retrieveFieldMappings()
     {
 
@@ -187,7 +187,6 @@ abstract class GigyaUpdater
         $this->apiHelper->updateGigyaAccount($this->gigyaUid, $this->gigyaArray['profile'], $this->gigyaArray['data']);
     }
 
-
     /**
      * @param mixed $val
      * @param ConfItem $conf
@@ -221,7 +220,11 @@ abstract class GigyaUpdater
     {
         $keys = explode($separator, $path);
 
-        foreach ($keys as $key) {
+        foreach ($keys as $key)
+        {
+        	if (!array_key_exists($key, $arr))
+        		$arr[$key] = array();
+
             $arr = &$arr[$key];
         }
 
